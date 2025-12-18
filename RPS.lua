@@ -7,7 +7,7 @@ function table.location(table, element)
     return nil
 end
 
-function table.contains (table, element)
+function table.contains(table, element)
     for _, value in pairs(table) do
         if value == element then
             return true
@@ -16,7 +16,7 @@ function table.contains (table, element)
     return false
 end
 
-local function clear ()
+local function clear()
     os.execute("clear 2>/dev/null || cls")
 end
 
@@ -29,19 +29,19 @@ local score_matrix = {
 }
 local Player = {name = "", action = "", score = 0, numeric_action = 0}
 
-function Player:new (object)
+function Player:new(object)
     object = object or {}
     setmetatable(object, self)
     self.__index = self
     return object
 end
 
-function Player:set_name ()
+function Player:set_name()
     print("Please enter your name:")
     self.name = io.read()
 end
 
-function Player:get_action ()
+function Player:get_action()
     clear()
     while true do
         print("Hi "..self.name.."! What is your action? Rock, Paper or Scissors?")
@@ -55,7 +55,7 @@ function Player:get_action ()
     end
 end
 
-local function get_result (player1, player2)
+local function get_result(player1, player2)
     local result = score_matrix[player1.numeric_action][player2.numeric_action]
     if result == 1 then
         player1.score = player1.score + 1
