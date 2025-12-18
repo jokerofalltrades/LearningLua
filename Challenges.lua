@@ -41,7 +41,7 @@ as ipairs stops at a null value, which t[2] is.
 you could either change ipairs to pairs or t[3] to t[2]
 --]]
 
--- Challenge 5
+--[[ Challenge 5
 local ACTIONS = {rock = 1, paper = 2, scissors = 3}
 
 local function get_numerical_action ()
@@ -95,9 +95,10 @@ local function get_result ()
     end
 end
 
+local players = {human_player, ai_player}
+
 while true do
-    human_player.get_action(human_player)
-    ai_player.get_action(ai_player)
+    for _, player in players do player.get_action() end
     get_result()
     print("Your score: "..human_player.score.."\nAI score: "..ai_player.score)
     print("type exit to leave else press enter")
@@ -105,8 +106,21 @@ while true do
         break
     end
 end
+--]]
 
--- Challenge 8
---[[
-I'm not 100% sure how to do it without metatables but you can replace the colon operator with a . and pass self into the function and its behaviour will remain the same.
+--[[ Require Challenge
+local new_counter = require("counter")
+local counter_one = new_counter()
+local counter_two = new_counter()
+
+local function foo()
+    counter_one:increment()
+end
+
+counter_one:increment()
+print(counter_one:get())
+foo()
+counter_two:increment()
+print(counter_one:get())
+print(counter_two:get())
 --]]
