@@ -15,6 +15,8 @@ local function update_ordered_notes()
 	ordered_notes = temp_notes
 end
 
+local function is_note_at(index) return ordered_notes[index] ~= nil end
+
 local function add_note(note) notes[note] = true ; update_ordered_notes() end
 
 local function remove_note(note_index) notes[ordered_notes[note_index]] = nil ; update_ordered_notes() end
@@ -47,6 +49,7 @@ end
 
 
 return {
+    is_note_at = is_note_at,
     add_note = add_note,
     remove_note = remove_note,
     edit_note = edit_note,

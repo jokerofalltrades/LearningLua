@@ -10,12 +10,15 @@ add = function() print("Enter a note to add:") ; notes_manager.add_note(io.read(
 remove = function()
     notes_manager.print_notes()
     print("Enter the index of the note you want to remove:")
-    notes_manager.remove_note(tonumber(io.read())) end,
+    local index = tonumber(io.read())
+    while not index or not notes_manager.is_note_at(index) do print("That is an invalid input.") ; index = tonumber(io.read()) end
+    notes_manager.remove_note(index) end,
 print = function() notes_manager.print_notes() end,
 edit = function()
     notes_manager.print_notes()
     print("Enter the index of the note you want to edit:")
     local index = tonumber(io.read())
+    while not index or not notes_manager.is_note_at(index) do print("That is an invalid input.") ; index = tonumber(io.read()) end
     print("Enter the new note:")
     notes_manager.edit_note(index, io.read())
 end,
@@ -34,6 +37,8 @@ Here are the following actions you can perform:
     local action = io.read()
     clear()
     if action == "exit" then notes_manager.save_to_file("notes.txt") ; print("Your notes have been saved!") ; break end
-    action_mapper[action]()
+    if action_mapper[action] then action_mapper[action]()
+    else print("Invalid Command.")
+    end
     if action ~= "print" then clear() end
 end
