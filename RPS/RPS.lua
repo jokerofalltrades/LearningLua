@@ -16,15 +16,15 @@ local function get_result(players)
     local result = SCORE_MATRIX [ ACTIONS[players[1].action()] ] [ ACTIONS[players[2].action()] ]
     for _, player in ipairs(players) do
         if not player.is_human() then
-            print(player.name() .. " chose " .. player.action() .. ".")
+            io.write(player.name(), " chose ", player.action(), ".\n")
         end
     end
     if result == 1 then
         players[1].increment_score()
-        print(players[1].name() .. " won!")
+        io.write(players[1].name(), " won!\n")
     elseif result == -1 then
         players[2].increment_score()
-        print(players[2].name() .. " won!")
+        io.write(players[2].name(), " won!\n")
     else
         print("It was a draw!")
     end
@@ -41,7 +41,7 @@ while true do
     for _, player in ipairs(players) do while not player.get_action(ACTIONS, REV_ACTIONS) do print("That is an invalid input!") end clear() end
     get_result(players)
     for _, player in ipairs(players) do player.show_state() end
-    print("Type exit to leave else press enter.")
+    io.write("Type exit to leave else press enter. ")
     if string.lower(io.read()) == "exit" then
         break
     end

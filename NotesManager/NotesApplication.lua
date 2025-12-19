@@ -6,20 +6,20 @@ local notes_manager = require("NotesManager")
 if notes_manager.load_from_file("notes.txt") then print("Notes loaded successfully!") end
 
 local action_mapper = {
-add = function() print("Enter a note to add:") ; notes_manager.add_note(io.read()) end,
+add = function() io.write("Enter a note to add: ") ; notes_manager.add_note(io.read()) end,
 remove = function()
     notes_manager.print_notes()
-    print("Enter the index of the note you want to remove:")
+    io.write("Enter the index of the note you want to remove: ")
     local index = tonumber(io.read())
     while not index or not notes_manager.is_note_at(index) do print("That is an invalid input.") ; index = tonumber(io.read()) end
     notes_manager.remove_note(index) end,
 print = function() notes_manager.print_notes() end,
 edit = function()
     notes_manager.print_notes()
-    print("Enter the index of the note you want to edit:")
+    io.write("Enter the index of the note you want to edit: ")
     local index = tonumber(io.read())
     while not index or not notes_manager.is_note_at(index) do print("That is an invalid input.") ; index = tonumber(io.read()) end
-    print("Enter the new note:")
+    io.write("Enter the new note: ")
     notes_manager.edit_note(index, io.read())
 end,
 clear = function() notes_manager.clear_notes() end
