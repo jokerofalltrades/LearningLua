@@ -12,7 +12,8 @@ remove = function()
     io.write("Enter the index of the note you want to remove: ")
     local index = tonumber(io.read())
     while not index or not notes_manager.is_note_at(index) do print("That is an invalid input.") ; index = tonumber(io.read()) end
-    notes_manager.remove_note(index) end,
+    notes_manager.remove_note(index) 
+end,
 print = function() notes_manager.print_notes() end,
 edit = function()
     notes_manager.print_notes()
